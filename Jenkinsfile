@@ -3,60 +3,31 @@ pipeline {
 	
 	  tools
     {
-       maven "Maven"
+       //maven "Maven"
     }
  stages {
       stage('checkout') {
            steps {
              
-                git branch: 'master', url: 'https://github.com/devops4solutions/CI-CD-using-Docker.git'
+                git branch: 'docker-tomcat-maven-rollback', url: 'https://github.com/ShivaliSKirdat/docker-tomcat-maven.git'
              
           }
         }
-	 stage('Execute Maven') {
+	 stage('Delete Docker Conatiner') {
            steps {
              
-                sh 'mvn package'             
+                sh 'docker stop samplewebapp'
+		sh 'docker rm samplewebapp'
           }
         }
         
 
-  stage('Docker Build and Tag') {
+  stage('Remove Build Docker Image') {
            steps {
               
-                sh 'docker build -t samplewebapp:latest .' 
-                sh 'docker tag samplewebapp shivalikirdat/samplewebapp:latest'
-                //sh 'docker tag samplewebapp shivalikirdat/samplewebapp:$BUILD_NUMBER'
-               
+                sh 'docker rmi shivalikirdat/samplewebapp:latest'
           }
         }
-     
-  stage('Publish image to Docker Hub') {
-          
-            steps {
-        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-          sh  'docker push shivalikirdat/samplewebapp:latest'
-        //  sh  'docker push shivalikirdat/samplewebapp:$BUILD_NUMBER' 
-        }
-                  
-          }
-        }
-     
-      stage('Run Docker container on Jenkins Agent') {
-             
-            steps 
-			{
-                sh "docker run -d -p 8082:8082 shivalikirdat/samplewebapp"
- 
-            }
-        }
- //stage('Run Docker container on remote hosts') {
-             
-          //  steps {
-              //  sh "docker -H ssh://jenkins@172.31.28.25 run -d -p 8003:8081 shivalikirdat/samplewebapp"
- 
-          //  }
-      //  }
     }
-	}
+}
     
