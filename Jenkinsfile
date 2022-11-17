@@ -46,7 +46,7 @@ pipeline {
              
             steps 
 			{
-                sh "docker run -d -p 8083:8083 shivalikirdat/samplewebapp --name samplewebapp"
+                sh "docker run --name samplewebapp -d -p 8083:8083 shivalikirdat/samplewebapp"
  
             }
         }
