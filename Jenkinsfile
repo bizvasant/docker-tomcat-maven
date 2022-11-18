@@ -56,7 +56,7 @@ pipeline {
             sshagent(credentials:['ec2-user']){               
 		//sh "docker -o StrictHostKeyChecking=no -H ssh://ec2-user@3.144.167.98 run -d -p 8080:8080 shivalikirdat/samplewebapp"
 		  sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@3.144.167.98'
-		  sh "docker run -d -p 8080:8080 shivalikirdat/samplewebapp"
+		  sh "docker run -d -p 8080:8081 shivalikirdat/samplewebapp"
  
             }
         }
