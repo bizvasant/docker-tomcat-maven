@@ -61,6 +61,13 @@ pipeline {
             }
         }
   }
+	stage('checkout scm') {
+           steps {
+             
+		   docker.withServer('tcp://3.144.167.98:8081', '')
+		   sh "docker run -d -p 8081:8081 shivalikirdat/samplewebapp"          
+          }
+        }
     }
-	}
+}
     
