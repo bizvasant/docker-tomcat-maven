@@ -1,4 +1,4 @@
-final String staging_docker_host = "ssh://ec2-user@3.144.167.98"
+// final String staging_docker_host = "ssh://ec2-user@3.144.167.98"
 
 pipeline {   
     agent any
@@ -56,7 +56,7 @@ pipeline {
              steps 
 	           {
             sshagent(credentials:['ec2-user']){
-		    withEnv(["DOCKER_HOST=${staging_docker_host}"]) {
+		    withEnv(["DOCKER_HOST=3.144.167.98"]) {
 		//sh "docker -o StrictHostKeyChecking=no -H ssh://ec2-user@3.144.167.98 run -d -p 8080:8080 shivalikirdat/samplewebapp"
 		//sh 'ssh -t -o StrictHostKeyChecking=no  ec2-user@3.144.167.98 && docker run -d -p 8083:8083 shivalikirdat/samplewebapp'
 		  sh 'docker run --host ec2-user@3.144.167.98 -d -p 8083:8083 shivalikirdat/samplewebapp'
