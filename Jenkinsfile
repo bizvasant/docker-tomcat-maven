@@ -53,8 +53,8 @@ pipeline {
   stage('Run Docker container on remote hosts') {
              steps 
 	           {
-            sshagent(credentials:['Login_Cloud_Server']){               
-		sh "docker -H ssh://ec2-user@3.144.135.212 run -d -p 8080:8080 shivalikirdat/samplewebapp"
+            sshagent(credentials:['ec2-user']){               
+		sh "docker -H ssh://ec2-user@3.144.167.98 run -d -p 8080:8080 shivalikirdat/samplewebapp"
  
             }
         }
