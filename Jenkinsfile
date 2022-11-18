@@ -51,12 +51,14 @@ pipeline {
             }
         }
   stage('Run Docker container on remote hosts') {
-             
-            steps {
-                sh "docker -H ssh://ec2-user@3.144.135.212 run -d -p 8080:8080 shivalikirdat/samplewebapp"
+             steps 
+	           {
+            sshagent(credentials:['Login_Cloud_Server']){               
+		sh "docker -H ssh://ec2-user@3.144.135.212 run -d -p 8080:8080 shivalikirdat/samplewebapp"
  
             }
         }
+  }
     }
 	}
     
