@@ -56,7 +56,7 @@ pipeline {
              steps 
 	           {
             sshagent(credentials:['ec2-user']){
-		    withEnv(["DOCKER_HOST=ssh://ec2-user@3.144.167.98"]) {
+		    withEnv(["DOCKER_HOST=ssh://ec2-user@52.14.230.122"]) {
 		//sh "docker -o StrictHostKeyChecking=no -H ssh://ec2-user@3.144.167.98 run -d -p 8080:8080 shivalikirdat/samplewebapp"
 		//sh 'ssh -t -o StrictHostKeyChecking=no  ec2-user@3.144.167.98 && docker run -d -p 8083:8083 shivalikirdat/samplewebapp'
 // 		  sh 'docker run --host ec2-user@3.144.167.98 -d -p 8083:8083 shivalikirdat/samplewebapp'
